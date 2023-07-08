@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
             distanceToFood = Vector3.Distance(transform.position, targetFood);
             Debug.Log(distanceToFood);
 
-            if(distanceToFood <= 2f && Input.GetKeyDown(KeyCode.E))
+            if(distanceToFood <= 2f && Input.GetKeyDown(KeyCode.Space))
             {
                 Object.Destroy(This.GetChild(0).GetComponent<Detection>().targetFoodObject);
 
