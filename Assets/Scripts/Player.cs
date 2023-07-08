@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     void Update()
     {
 
+        //float distanceToFood = transform.position - 
+
         float horizontalMovement = Input.GetAxisRaw("Horizontal");
         float verticalMovement = Input.GetAxisRaw("Vertical");
 
@@ -27,5 +29,12 @@ public class Player : MonoBehaviour
 
 
         rb.AddForce(movement * speed);
+
+
+
+
+
+
+
     }
 }
