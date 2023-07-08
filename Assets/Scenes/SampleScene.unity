@@ -540,6 +540,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
+      propertyPath: grabCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
+      propertyPath: originalGrabCooldown
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4188655947539771408, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: m_Constraints
       value: 112
