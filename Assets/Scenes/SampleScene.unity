@@ -323,53 +323,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &932714678
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 932714680}
-  - component: {fileID: 932714679}
-  m_Layer: 0
-  m_Name: foodSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &932714679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932714678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c828498baf1001a40861fcd5361ee542, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  food: {fileID: 7177381124470281422, guid: c3fb8e0a84128cf4bb7ad58661c2ffb8, type: 3}
-  totalFood: 20
-  foodCount: 0
---- !u!4 &932714680
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932714678}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1495259593}
   - component: {fileID: 1495259592}
-  - component: {fileID: 1495259591}
+  - component: {fileID: 1495259594}
   m_Layer: 0
   m_Name: detectionRadius
   m_TagString: Untagged
@@ -480,22 +433,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1495259591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495259590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0480f958b39b77447afd1d918a7a00bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  food: []
-  targetFood: {fileID: 0}
-  foodObject: []
-  targetFoodObject: {fileID: 0}
 --- !u!135 &1495259592
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -530,8 +467,25 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1495259594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495259590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68b233c3709971040adcc098e99a9ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodSpawnAmount: 20
+  foodCounter: 0
+  foodPrefab: {fileID: 7177381124470281422, guid: c3fb8e0a84128cf4bb7ad58661c2ffb8, type: 3}
+  allFoods: []
+  foodObject: []
 --- !u!1001 &2961811900072130635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -595,5 +549,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4930749866384095680, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2961811900072130637}
   m_SourcePrefab: {fileID: 100100000, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
+--- !u!1 &2961811900072130636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4930749866384095680, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
+  m_PrefabInstance: {fileID: 2961811900072130635}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2961811900072130637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2961811900072130636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0480f958b39b77447afd1d918a7a00bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  food: []
+  targetFood: {fileID: 0}
+  foodObject: []
+  targetFoodObject: {fileID: 0}
