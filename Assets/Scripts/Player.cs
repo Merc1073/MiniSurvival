@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
 
         if(grabCooldownActive == true)
         {
+            rb.drag = 50;
             canMove = false;
             grabCooldown -= 1f * Time.deltaTime;
         }
@@ -73,12 +74,12 @@ public class Player : MonoBehaviour
         rb.AddForce(movement * speed);
 
 
-
     }
 
     void Harvesting(GameObject interactedObject)
     {
         Object.Destroy(interactedObject);
         canMove = true;
+        rb.drag = 10;
     }
 }
