@@ -36,9 +36,23 @@ public class Player : MonoBehaviour
 
         if(grabCooldownActive == true)
         {
-            rb.drag = 50;
-            canMove = false;
-            grabCooldown -= 1f * Time.deltaTime;
+            if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+            {
+                Debug.Log("Activated");
+                canMove = true;
+                grabCooldown = originalGrabCooldown;
+                rb.drag = 10;
+                grabCooldownActive = false;
+            }
+
+            else
+            {
+                rb.drag = 50;
+                canMove = false;
+                grabCooldown -= 1f * Time.deltaTime;
+            }
+            
+
         }
 
         if(grabCooldown <= 0f)
