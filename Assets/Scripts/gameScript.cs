@@ -35,13 +35,7 @@ public class gameScript : MonoBehaviour
 
     void Update()
     {
-        
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-
-        if(foodCounter < 0)
+        if (foodCounter < 0)
         {
             foodCounter = 0;
         }
@@ -49,11 +43,15 @@ public class gameScript : MonoBehaviour
         allFoods.RemoveAll(obj => obj == null);
         foodObject.RemoveAll(obj => obj == null);
 
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+
         if(other.gameObject.CompareTag("Food"))
         {
             foodObject.Add(other.gameObject);
         }
-
 
     }
 

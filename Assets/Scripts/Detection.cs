@@ -23,12 +23,19 @@ public class Detection : MonoBehaviour
     void Update()
     {
         food.RemoveAll(i => i == null);
+        foodObject.RemoveAll(i => i == null);
 
         if(food.Count != 0)
         {
             targetFood = GetClosestTransform(food);
 
             targetFoodObject = GetClosestObject(foodObject);
+        }
+
+        else
+        {
+            targetFood = null;
+            targetFoodObject = null;
         }
     }
 
@@ -39,6 +46,15 @@ public class Detection : MonoBehaviour
         {
             food.Add(other.transform);
             foodObject.Add(other.gameObject);
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("Food"))
+        {
+            food.Remove(other.transform);
+            foodObject.Remove(other.gameObject);
         }
     }
 
