@@ -2118,7 +2118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: playerHungerDecrease
-      value: 20
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: sprintDefaultCooldown
