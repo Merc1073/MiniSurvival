@@ -10,10 +10,12 @@ public class Player : MonoBehaviour
     public float healthClock;
     float delayTime;
 
-    public float playerHealth;
+    public float currentPlayerHealth;
+    public float maxPlayerHealth;
     public int playerHealthHungryDecrease;
 
-    public float playerHunger;
+    public float currentPlayerHunger;
+    public float maxPlayerHunger;
     public float playerHungerDecrease;
 
     public float speed;
@@ -22,7 +24,8 @@ public class Player : MonoBehaviour
 
     public float distanceToFood;
 
-    public float stamina = 100f;
+    public float currentStamina = 100f;
+    public float maxStamina;
 
     public float sprintIncrease;
     public float sprintDecrease;
@@ -84,19 +87,31 @@ public class Player : MonoBehaviour
     void Update()
     {
 
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            UseSelectedItem();
+
+            currentPlayerHunger += 25;
+        }
+
+        else if(Input.GetKeyUp(KeyCode.E))
+        {
+            
+        }
+
         clock += Time.deltaTime;
         healthClock += Time.deltaTime;
 
         
 
-        staminaBar.slider.value = stamina;
+        staminaBar.slider.value = currentStamina;
         interactBar.slider.value = interactSliderValue;
-        healthBar.slider.value = playerHealth;
-        hungerBar.slider.value = playerHunger;
+        healthBar.slider.value = currentPlayerHealth;
+        hungerBar.slider.value = currentPlayerHunger;
 
         playerVelocity = rb.velocity;
 
-        playerHunger -= playerHungerDecrease * Time.deltaTime;
+        currentPlayerHunger -= playerHungerDecrease * Time.deltaTime;
 
         //-----------------------------------
 
@@ -104,23 +119,33 @@ public class Player : MonoBehaviour
         {
             healthClock = 0f;
 
-            if (playerHunger <= 0f)
+            if (currentPlayerHunger <= 0f)
             {
-                playerHealth -= playerHealthHungryDecrease;
+                currentPlayerHealth -= playerHealthHungryDecrease;
             }
         }
 
-        if(playerHunger <= 0f)
+        if(currentPlayerHunger <= 0f)
         {
-            playerHunger = 0f;
+            currentPlayerHunger = 0f;
         }
 
-        if(playerHealth <= 0f)
+        if(currentPlayerHunger >= maxPlayerHunger)
         {
-            playerHealth = 0f;
+            currentPlayerHunger = maxPlayerHunger;
         }
 
-        if (stamina == 0f)
+        if(currentPlayerHealth <= 0f)
+        {
+            currentPlayerHealth = 0f;
+        }
+
+        if(currentPlayerHealth > 100f)
+        {
+            currentPlayerHealth = maxPlayerHealth;
+        }
+
+        if (currentStamina == 0f)
         {
             sprintCooldownActive = true;
 
@@ -182,23 +207,23 @@ public class Player : MonoBehaviour
 
         if (isSprintPressed == true)
         {
-            stamina -= (sprintDecrease * Time.deltaTime);
+            currentStamina -= (sprintDecrease * Time.deltaTime);
         }
 
         else if (isSprintPressed == false && sprintCooldownActive == false)
         {
-            stamina += (sprintIncrease * Time.deltaTime);
+            currentStamina += (sprintIncrease * Time.deltaTime);
         }
 
 
-        if (stamina > 100f)
+        if (currentStamina > maxStamina)
         {
-            stamina = 100f;
+            currentStamina = maxStamina;
         }
 
-        else if (stamina < 0f)
+        else if (currentStamina < 0f)
         {
-            stamina = 0f;
+            currentStamina = 0f;
         }
 
 
@@ -285,18 +310,46 @@ public class Player : MonoBehaviour
 
     void Harvesting(GameObject interactedObject)
     {
-        Debug.Log("In 1");
         bool canAdd = InventoryManager.instance.AddItem(item);
         if(canAdd)
         {
-            Debug.Log("In 2");
             Object.Destroy(interactedObject);
             canMove = true;
             rb.drag = 10;
             interactBar.borderImage.enabled = false;
             interactBar.fillImage.enabled = false;
-            Debug.Log("In 3");
         }
 
     }
+
+    public void GetSelectedItem()
+    {
+        Item receivedItem = InventoryManager.instance.GetSelectedItem(false);
+
+        if(receivedItem != null)
+        {
+            Debug.Log("Item in slot: " + receivedItem);
+        }
+
+        else
+        {
+            Debug.Log("No item in slot.");
+        }
+    }
+
+    public void UseSelectedItem()
+    {
+        Item receivedItem = InventoryManager.instance.GetSelectedItem(true);
+
+        if (receivedItem != null)
+        {
+            Debug.Log(receivedItem + " consumed.");
+        }
+
+        else
+        {
+            Debug.Log("No item in slot to use.");
+        }
+    }
+
 }
