@@ -7,13 +7,30 @@ public class Player : MonoBehaviour
 {
 
     public float speed;
+    public float sprintMultiplier;
+    public float originalSpeed;
+
     public float distanceToFood;
+
+    public float stamina = 100f;
+
+    public float sprintIncrease;
+    public float sprintDecrease;
+
+    public float sprintCooldown;
+    public float sprintDefaultCooldown;
 
     public float interactSliderValue = 0f;
     public float originalInteractSliderValue;
 
     public float grabCooldown = 100f;
     public float originalGrabCooldown;
+
+    public bool isSprintPressed = false;
+    public bool sprintCooldownActive = false;
+
+    public Vector3 playerVelocity;
+    public Vector3 noMovement;
 
     bool grabCooldownActive = false;
     bool canMove = true;
@@ -34,8 +51,10 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         This = gameObject.transform;
+
         interactBar.borderImage.enabled = false;
         interactBar.fillImage.enabled = false;
+        noMovement = new Vector3(0, 0, 0);
 
     }
 
@@ -43,6 +62,96 @@ public class Player : MonoBehaviour
     {
 
         interactBar.slider.value = interactSliderValue;
+
+        playerVelocity = rb.velocity;
+
+        //-----------------------------------
+
+
+        if (stamina == 0f)
+        {
+            sprintCooldownActive = true;
+
+            speed = originalSpeed;
+        }
+
+        if (sprintCooldown <= 0f)
+        {
+            sprintCooldownActive = false;
+        }
+
+
+        if (sprintCooldownActive == true)
+        {
+            sprintCooldown -= 1f * Time.deltaTime;
+        }
+
+        else if (sprintCooldownActive == false)
+        {
+            sprintCooldown = sprintDefaultCooldown;
+        }
+
+
+        if(sprintCooldown < 0f)
+        {
+            sprintCooldown = 0f;
+        }
+
+
+        //-----------------------------------
+
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+
+            isSprintPressed = true;
+
+            speed *= sprintMultiplier;
+
+        }
+        
+
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+
+            isSprintPressed = false;
+
+            speed = originalSpeed;
+
+        }
+
+
+
+        //-----------------------------------
+
+
+
+        if (isSprintPressed == true)
+        {
+            stamina -= (sprintDecrease * Time.deltaTime);
+        }
+
+        else if (isSprintPressed == false && sprintCooldownActive == false)
+        {
+            stamina += (sprintIncrease * Time.deltaTime);
+        }
+
+
+        if (stamina > 100f)
+        {
+            stamina = 100f;
+        }
+
+        else if (stamina < 0f)
+        {
+            stamina = 0f;
+        }
+
+
+
+        //-----------------------------------
+
+
 
         if (grabCooldownActive == true)
         {
@@ -70,7 +179,15 @@ public class Player : MonoBehaviour
 
         }
 
-        if(grabCooldown <= 0f)
+
+
+
+        //-----------------------------------
+
+
+
+
+        if (grabCooldown <= 0f)
         {
             grabCooldownActive = false;
             grabCooldown = originalGrabCooldown;
