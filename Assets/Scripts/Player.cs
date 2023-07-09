@@ -6,7 +6,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+    public float clock;
+    public float healthClock;
+    float delayTime;
+
     public float playerHealth;
+    public int playerHealthHungryDecrease;
+
+    public float playerHunger;
+    public float playerHungerDecrease;
 
     public float speed;
     public float sprintMultiplier;
@@ -53,6 +61,7 @@ public class Player : MonoBehaviour
     public InteractionBar interactBar;
     public StaminaBar staminaBar;
     public HealthBar healthBar;
+    public HungerBar hungerBar;
 
 
     private void Start()
@@ -66,20 +75,45 @@ public class Player : MonoBehaviour
         interactBar.fillImage.enabled = false;
 
         //noMovement = new Vector3(0, 0, 0);
+        delayTime = 1f;
 
     }
 
     void Update()
     {
 
+        clock += Time.deltaTime;
+        healthClock += Time.deltaTime;
+
+        
+
         staminaBar.slider.value = stamina;
         interactBar.slider.value = interactSliderValue;
         healthBar.slider.value = playerHealth;
+        hungerBar.slider.value = playerHunger;
 
         playerVelocity = rb.velocity;
 
+        playerHunger -= playerHungerDecrease * Time.deltaTime;
+
         //-----------------------------------
 
+        if (healthClock >= delayTime)
+        {
+            healthClock = 0f;
+
+            if (playerHunger <= 0f)
+            {
+                playerHunger = 0f;
+                playerHealth -= playerHealthHungryDecrease;
+            }
+        }
+
+
+        if(playerHealth <= 0f)
+        {
+            playerHealth = 0f;
+        }
 
         if (stamina == 0f)
         {
