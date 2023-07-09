@@ -6,6 +6,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+    public float playerHealth;
+
     public float speed;
     public float sprintMultiplier;
     public float originalSpeed;
@@ -50,6 +52,7 @@ public class Player : MonoBehaviour
 
     public InteractionBar interactBar;
     public StaminaBar staminaBar;
+    public HealthBar healthBar;
 
 
     private void Start()
@@ -71,6 +74,7 @@ public class Player : MonoBehaviour
 
         staminaBar.slider.value = stamina;
         interactBar.slider.value = interactSliderValue;
+        healthBar.slider.value = playerHealth;
 
         playerVelocity = rb.velocity;
 
