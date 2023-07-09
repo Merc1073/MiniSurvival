@@ -22,7 +22,8 @@ public class Player : MonoBehaviour
     public float sprintMultiplier;
     public float originalSpeed;
 
-    public float distanceToFood;
+    public float distanceToGrass;
+    public float distanceToTwigs;
 
     public float currentStamina = 100f;
     public float maxStamina;
@@ -53,7 +54,10 @@ public class Player : MonoBehaviour
     bool interactCooldownActive = false;
     bool canMove = true;
 
-    public Item item;
+    private Item itemToPickup;
+
+    public Item grassItem;
+    public Item twigsItem;
 
     public Vector3 movement;
 
@@ -268,19 +272,35 @@ public class Player : MonoBehaviour
 
 
 
-        if(This.GetChild(0).GetComponent<Detection>().targetFood != null)
+        if(This.GetChild(0).GetComponent<Detection>().targetGrass != null)
         {
-            Vector3 targetFood = This.GetChild(0).GetComponent<Detection>().targetFood.position;
-            distanceToFood = Vector3.Distance(transform.position, targetFood);
-            //Debug.Log(distanceToFood);
+            Vector3 targetGrass = This.GetChild(0).GetComponent<Detection>().targetGrass.position;
+            distanceToGrass = Vector3.Distance(transform.position, targetGrass);
 
-            if(distanceToFood <= 2f && Input.GetKeyDown(KeyCode.Space))
+            if(distanceToGrass <= 2f && Input.GetKeyDown(KeyCode.Space))
             {
                 interactBar.borderImage.enabled = true;
                 interactBar.fillImage.enabled = true;
 
                 interactCooldownActive = true;
-                lastCollectedItem = This.GetChild(0).GetComponent<Detection>().targetFoodObject;
+                lastCollectedItem = This.GetChild(0).GetComponent<Detection>().targetGrassObject;
+                itemToPickup = grassItem;
+            }
+        }
+
+        if (This.GetChild(0).GetComponent<Detection>().targetTwigs != null)
+        {
+            Vector3 targetTwigs = This.GetChild(0).GetComponent<Detection>().targetTwigs.position;
+            distanceToTwigs = Vector3.Distance(transform.position, targetTwigs);
+
+            if (distanceToTwigs <= 2f && Input.GetKeyDown(KeyCode.Space))
+            {
+                interactBar.borderImage.enabled = true;
+                interactBar.fillImage.enabled = true;
+
+                interactCooldownActive = true;
+                lastCollectedItem = This.GetChild(0).GetComponent<Detection>().targetTwigsObject;
+                itemToPickup = twigsItem;
             }
         }
 
@@ -310,7 +330,7 @@ public class Player : MonoBehaviour
 
     void Harvesting(GameObject interactedObject)
     {
-        bool canAdd = InventoryManager.instance.AddItem(item);
+        bool canAdd = InventoryManager.instance.AddItem(itemToPickup);
         if(canAdd)
         {
             Object.Destroy(interactedObject);

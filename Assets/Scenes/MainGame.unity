@@ -1730,10 +1730,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0480f958b39b77447afd1d918a7a00bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: []
-  targetFood: {fileID: 0}
-  foodObject: []
-  targetFoodObject: {fileID: 0}
+  grass: []
+  twigs: []
+  targetGrass: {fileID: 0}
+  targetTwigs: {fileID: 0}
+  grassObject: []
+  twigsObject: []
+  targetGrassObject: {fileID: 0}
+  targetTwigsObject: {fileID: 0}
 --- !u!1 &1141121904
 GameObject:
   m_ObjectHideFlags: 0
@@ -2252,7 +2256,7 @@ GameObject:
   - component: {fileID: 1495259592}
   - component: {fileID: 1495259594}
   m_Layer: 0
-  m_Name: detectionRadius
+  m_Name: prefabSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2306,11 +2310,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b233c3709971040adcc098e99a9ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodSpawnAmount: 20
-  foodCounter: 0
-  foodPrefab: {fileID: 7177381124470281422, guid: c3fb8e0a84128cf4bb7ad58661c2ffb8, type: 3}
-  allFoods: []
-  foodObject: []
+  grassSpawnAmount: 20
+  twigsSpawnAmount: 20
+  grassCounter: 0
+  twigsCounter: 0
+  grassPrefab: {fileID: 7177381124470281422, guid: c3fb8e0a84128cf4bb7ad58661c2ffb8, type: 3}
+  twigsPrefab: {fileID: 7177381124470281422, guid: 774c4c9ca488c6746a5ff2c00be74805, type: 3}
+  allGrass: []
+  allTwigs: []
+  grassObject: []
+  twigsObject: []
 --- !u!1 &1610006049
 GameObject:
   m_ObjectHideFlags: 0
@@ -3491,6 +3500,10 @@ PrefabInstance:
       value: 7000
       objectReference: {fileID: 0}
     - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
+      propertyPath: grassItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 287f285530f37154b978fa20f0445acd, type: 2}
+    - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 2028170268}
@@ -3498,6 +3511,10 @@ PrefabInstance:
       propertyPath: hungerBar
       value: 
       objectReference: {fileID: 165249382}
+    - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
+      propertyPath: twigsItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c7550e5c88e53d458ad0184105c1b5b, type: 2}
     - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: maxStamina
       value: 100

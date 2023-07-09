@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Food : MonoBehaviour
+public class Craftables : MonoBehaviour
 {
     public Transform This;
     public GameObject entity;
@@ -10,7 +10,7 @@ public class Food : MonoBehaviour
     public Vector3 position;
 
 
-    public Food(GameObject _entity, Vector3 _position)
+    public Craftables(GameObject _entity, Vector3 _position)
     {
 
         entity = _entity;

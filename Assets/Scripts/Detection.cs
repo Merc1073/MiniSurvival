@@ -5,56 +5,92 @@ using UnityEngine;
 public class Detection : MonoBehaviour
 {
 
-    public List<Transform> food;
+    public List<Transform> grass;
+    public List<Transform> twigs;
 
-    public Transform targetFood;
+    public Transform targetGrass;
+    public Transform targetTwigs;
 
-    public List<GameObject> foodObject;
+    public List<GameObject> grassObject;
+    public List<GameObject> twigsObject;
 
-    public GameObject targetFoodObject;
+    public GameObject targetGrassObject;
+    public GameObject targetTwigsObject;
 
 
     void Start()
     {
-        targetFood = null;
-        targetFoodObject = null;
+        targetGrass = null;
+        targetGrassObject = null;
+
+        targetTwigs = null;
+        targetTwigsObject = null;
     }
 
     void Update()
     {
-        food.RemoveAll(i => i == null);
-        foodObject.RemoveAll(i => i == null);
+        grass.RemoveAll(i => i == null);
+        grassObject.RemoveAll(i => i == null);
 
-        if(food.Count != 0)
+        twigs.RemoveAll(i => i == null);
+        twigsObject.RemoveAll(i => i == null);
+
+        if (grass.Count != 0)
         {
-            targetFood = GetClosestTransform(food);
+            targetGrass = GetClosestTransform(grass);
 
-            targetFoodObject = GetClosestObject(foodObject);
+            targetGrassObject = GetClosestObject(grassObject);
         }
 
         else
         {
-            targetFood = null;
-            targetFoodObject = null;
+            targetGrass = null;
+            targetGrassObject = null;
+        }
+
+
+        if (twigs.Count != 0)
+        {
+            targetTwigs = GetClosestTransform(twigs);
+
+            targetTwigsObject = GetClosestObject(twigsObject);
+        }
+
+        else
+        {
+            targetTwigs = null;
+            targetTwigsObject = null;
         }
     }
 
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Food"))
+        if (other.gameObject.CompareTag("Grass"))
         {
-            food.Add(other.transform);
-            foodObject.Add(other.gameObject);
+            grass.Add(other.transform);
+            grassObject.Add(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Twigs"))
+        {
+            twigs.Add(other.transform);
+            twigsObject.Add(other.gameObject);
         }
     }
 
     public void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.CompareTag("Food"))
+        if(other.gameObject.CompareTag("Grass"))
         {
-            food.Remove(other.transform);
-            foodObject.Remove(other.gameObject);
+            grass.Remove(other.transform);
+            grassObject.Remove(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Twigs"))
+        {
+            twigs.Remove(other.transform);
+            twigsObject.Remove(other.gameObject);
         }
     }
 
