@@ -50,6 +50,8 @@ public class Player : MonoBehaviour
     bool interactCooldownActive = false;
     bool canMove = true;
 
+    public Item item;
+
     public Vector3 movement;
 
     Rigidbody rb;
@@ -262,7 +264,9 @@ public class Player : MonoBehaviour
             interactCooldownActive = false;
             interactCooldown = originalGrabCooldown;
             interactSliderValue = originalInteractSliderValue;
+
             Harvesting(lastCollectedItem);
+
         }
 
         float horizontalMovement = Input.GetAxisRaw("Horizontal");
@@ -281,10 +285,18 @@ public class Player : MonoBehaviour
 
     void Harvesting(GameObject interactedObject)
     {
-        Object.Destroy(interactedObject);
-        canMove = true;
-        rb.drag = 10;
-        interactBar.borderImage.enabled = false;
-        interactBar.fillImage.enabled = false;
+        Debug.Log("In 1");
+        bool canAdd = InventoryManager.instance.AddItem(item);
+        if(canAdd)
+        {
+            Debug.Log("In 2");
+            Object.Destroy(interactedObject);
+            canMove = true;
+            rb.drag = 10;
+            interactBar.borderImage.enabled = false;
+            interactBar.fillImage.enabled = false;
+            Debug.Log("In 3");
+        }
+
     }
 }
