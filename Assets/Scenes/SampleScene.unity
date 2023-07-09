@@ -2126,7 +2126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: playerHealthHungryDecrease
-      value: 20
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4188655947539771408, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: m_Drag

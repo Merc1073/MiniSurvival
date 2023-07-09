@@ -104,11 +104,14 @@ public class Player : MonoBehaviour
 
             if (playerHunger <= 0f)
             {
-                playerHunger = 0f;
                 playerHealth -= playerHealthHungryDecrease;
             }
         }
 
+        if(playerHunger <= 0f)
+        {
+            playerHunger = 0f;
+        }
 
         if(playerHealth <= 0f)
         {
