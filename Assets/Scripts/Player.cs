@@ -34,6 +34,9 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         This = gameObject.transform;
+        interactBar.borderImage.enabled = false;
+        interactBar.fillImage.enabled = false;
+
     }
 
     void Update()
@@ -45,7 +48,9 @@ public class Player : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
             {
-                Debug.Log("Activated");
+                interactBar.borderImage.enabled = false;
+                interactBar.fillImage.enabled = false;
+
                 canMove = true;
                 grabCooldown = originalGrabCooldown;
                 interactSliderValue = originalInteractSliderValue;
@@ -81,6 +86,9 @@ public class Player : MonoBehaviour
 
             if(distanceToFood <= 2f && Input.GetKeyDown(KeyCode.Space))
             {
+                interactBar.borderImage.enabled = true;
+                interactBar.fillImage.enabled = true;
+
                 grabCooldownActive = true;
                 lastCollectedItem = This.GetChild(0).GetComponent<Detection>().targetFoodObject;
             }
@@ -106,5 +114,7 @@ public class Player : MonoBehaviour
         Object.Destroy(interactedObject);
         canMove = true;
         rb.drag = 10;
+        interactBar.borderImage.enabled = false;
+        interactBar.fillImage.enabled = false;
     }
 }

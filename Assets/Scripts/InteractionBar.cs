@@ -7,6 +7,8 @@ public class InteractionBar : MonoBehaviour
 {
 
     public Slider slider;
+    public Image borderImage;
+    public Image fillImage;
 
 
 }
