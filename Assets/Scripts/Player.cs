@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     public float sprintCooldown;
     public float sprintDefaultCooldown;
 
+    public float staminaSliderValue = 100f;
+    public float originalStaminaSliderValue;
     public float interactSliderValue = 0f;
     public float originalInteractSliderValue;
 
@@ -44,24 +46,29 @@ public class Player : MonoBehaviour
     GameObject lastCollectedItem;
 
     public InteractionBar interactBar;
+    public StaminaBar staminaBar;
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
         This = gameObject.transform;
 
         interactBar.borderImage.enabled = false;
         interactBar.fillImage.enabled = false;
-        noMovement = new Vector3(0, 0, 0);
+
+        //noMovement = new Vector3(0, 0, 0);
 
     }
 
     void Update()
     {
 
+        staminaBar.slider.value = stamina;
         interactBar.slider.value = interactSliderValue;
+
 
         playerVelocity = rb.velocity;
 
