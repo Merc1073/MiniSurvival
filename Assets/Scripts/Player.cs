@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     public float interactSliderValue = 0f;
     public float originalInteractSliderValue;
 
-    public float grabCooldown = 100f;
+    public float interactCooldown = 100f;
     public float originalGrabCooldown;
 
     public bool isSprintPressed = false;
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     public Vector3 playerVelocity;
     public Vector3 noMovement;
 
-    bool grabCooldownActive = false;
+    bool interactCooldownActive = false;
     bool canMove = true;
 
     public Vector3 movement;
@@ -160,7 +160,7 @@ public class Player : MonoBehaviour
 
 
 
-        if (grabCooldownActive == true)
+        if (interactCooldownActive == true)
         {
             if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
             {
@@ -168,18 +168,18 @@ public class Player : MonoBehaviour
                 interactBar.fillImage.enabled = false;
 
                 canMove = true;
-                grabCooldown = originalGrabCooldown;
+                interactCooldown = originalGrabCooldown;
                 interactSliderValue = originalInteractSliderValue;
 
                 rb.drag = 10;
-                grabCooldownActive = false;
+                interactCooldownActive = false;
             }
 
             else
             {
                 rb.drag = 50;
                 canMove = false;
-                grabCooldown -= 100f * Time.deltaTime;
+                interactCooldown -= 100f * Time.deltaTime;
                 interactSliderValue += 100f * Time.deltaTime;
             }
             
@@ -194,10 +194,10 @@ public class Player : MonoBehaviour
 
 
 
-        if (grabCooldown <= 0f)
+        if (interactCooldown <= 0f)
         {
-            grabCooldownActive = false;
-            grabCooldown = originalGrabCooldown;
+            interactCooldownActive = false;
+            interactCooldown = originalGrabCooldown;
             interactSliderValue = originalInteractSliderValue;
             Harvesting(lastCollectedItem);
         }
@@ -213,7 +213,7 @@ public class Player : MonoBehaviour
                 interactBar.borderImage.enabled = true;
                 interactBar.fillImage.enabled = true;
 
-                grabCooldownActive = true;
+                interactCooldownActive = true;
                 lastCollectedItem = This.GetChild(0).GetComponent<Detection>().targetFoodObject;
             }
         }
