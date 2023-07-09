@@ -9,7 +9,10 @@ public class Player : MonoBehaviour
     public float speed;
     public float distanceToFood;
 
-    public float grabCooldown = 1f;
+    public float interactSliderValue = 0f;
+    public float originalInteractSliderValue;
+
+    public float grabCooldown = 100f;
     public float originalGrabCooldown;
 
     bool grabCooldownActive = false;
@@ -23,6 +26,8 @@ public class Player : MonoBehaviour
 
     GameObject lastCollectedItem;
 
+    public InteractionBar interactBar;
+
 
     private void Start()
     {
@@ -34,13 +39,17 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if(grabCooldownActive == true)
+        interactBar.slider.value = interactSliderValue;
+
+        if (grabCooldownActive == true)
         {
             if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
             {
                 Debug.Log("Activated");
                 canMove = true;
                 grabCooldown = originalGrabCooldown;
+                interactSliderValue = originalInteractSliderValue;
+
                 rb.drag = 10;
                 grabCooldownActive = false;
             }
@@ -49,7 +58,8 @@ public class Player : MonoBehaviour
             {
                 rb.drag = 50;
                 canMove = false;
-                grabCooldown -= 1f * Time.deltaTime;
+                grabCooldown -= 100f * Time.deltaTime;
+                interactSliderValue += 100f * Time.deltaTime;
             }
             
 
@@ -59,6 +69,7 @@ public class Player : MonoBehaviour
         {
             grabCooldownActive = false;
             grabCooldown = originalGrabCooldown;
+            interactSliderValue = originalInteractSliderValue;
             Harvesting(lastCollectedItem);
         }
 
