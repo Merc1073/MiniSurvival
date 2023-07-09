@@ -1246,7 +1246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: sprintCooldown
-      value: 2
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: sprintDecrease
@@ -1266,7 +1266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: sprintDefaultCooldown
-      value: 2
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4188655947539771408, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: m_Drag

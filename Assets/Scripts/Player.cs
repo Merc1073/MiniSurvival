@@ -121,6 +121,8 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
 
+            sprintCooldownActive = true;
+
             isSprintPressed = false;
 
             speed = originalSpeed;
@@ -159,6 +161,7 @@ public class Player : MonoBehaviour
         //-----------------------------------
 
 
+        //Cancel interacting when moving.
 
         if (interactCooldownActive == true)
         {
@@ -194,13 +197,6 @@ public class Player : MonoBehaviour
 
 
 
-        if (interactCooldown <= 0f)
-        {
-            interactCooldownActive = false;
-            interactCooldown = originalGrabCooldown;
-            interactSliderValue = originalInteractSliderValue;
-            Harvesting(lastCollectedItem);
-        }
 
         if(This.GetChild(0).GetComponent<Detection>().targetFood != null)
         {
@@ -218,6 +214,13 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (interactCooldown <= 0f)
+        {
+            interactCooldownActive = false;
+            interactCooldown = originalGrabCooldown;
+            interactSliderValue = originalInteractSliderValue;
+            Harvesting(lastCollectedItem);
+        }
 
         float horizontalMovement = Input.GetAxisRaw("Horizontal");
         float verticalMovement = Input.GetAxisRaw("Vertical");
