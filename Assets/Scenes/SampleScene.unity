@@ -1229,6 +1229,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
+      propertyPath: speed
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 170115399}
@@ -1237,12 +1241,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 459596293}
     - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
+      propertyPath: affectedDrag
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: grabCooldown
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
+      propertyPath: originalDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: originalSpeed
-      value: 70
+      value: 7000
       objectReference: {fileID: 0}
     - target: {fileID: 3157958609829026605, guid: 3ff9a0660d20d8248b710373203038dc, type: 3}
       propertyPath: sprintCooldown

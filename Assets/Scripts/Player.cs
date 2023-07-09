@@ -28,6 +28,9 @@ public class Player : MonoBehaviour
     public float interactCooldown = 100f;
     public float originalGrabCooldown;
 
+    public float originalDrag;
+    public float affectedDrag;
+
     public bool isSprintPressed = false;
     public bool sprintCooldownActive = false;
 
@@ -68,7 +71,6 @@ public class Player : MonoBehaviour
 
         staminaBar.slider.value = stamina;
         interactBar.slider.value = interactSliderValue;
-
 
         playerVelocity = rb.velocity;
 
@@ -174,13 +176,13 @@ public class Player : MonoBehaviour
                 interactCooldown = originalGrabCooldown;
                 interactSliderValue = originalInteractSliderValue;
 
-                rb.drag = 10;
+                rb.drag = originalDrag;
                 interactCooldownActive = false;
             }
 
             else
             {
-                rb.drag = 50;
+                rb.drag = affectedDrag;
                 canMove = false;
                 interactCooldown -= 100f * Time.deltaTime;
                 interactSliderValue += 100f * Time.deltaTime;
@@ -231,7 +233,7 @@ public class Player : MonoBehaviour
         }
 
 
-        rb.AddForce(movement * speed);
+        rb.AddForce(movement * speed * Time.deltaTime);
 
 
     }
