@@ -91,7 +91,9 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if(Input.GetKeyDown(KeyCode.E))
+        //MovePlayerRelativeToCamera();
+
+        if(Input.GetKeyDown(KeyCode.F))
         {
             UseSelectedItem();
 
@@ -370,6 +372,28 @@ public class Player : MonoBehaviour
         {
             Debug.Log("No item in slot to use.");
         }
+    }
+
+    void MovePlayerRelativeToCamera()
+    {
+        float playerVerticalInput = Input.GetAxis("Vertical");
+        float playerHorizontalInput = Input.GetAxis("Horizontal");
+
+        Vector3 forward = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
+        forward.y = 0;
+        right.y = 0;
+        forward = forward.normalized;
+        right = right.normalized;
+
+        Vector3 forwardRelativeVerticalInput = playerVerticalInput * forward;
+        Vector3 rightRelativeVerticalInput = playerHorizontalInput * right;
+
+        Vector3 cameraRelativeMovement = forwardRelativeVerticalInput + rightRelativeVerticalInput;
+
+        transform.Translate(cameraRelativeMovement * Time.deltaTime * 20, Space.World);
+
+
     }
 
 }
