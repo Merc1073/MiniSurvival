@@ -6,54 +6,69 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+    [Header("Time variables")]
     public float clock;
     public float healthClock;
     float delayTime;
 
+    [Header("Health variables")]
     public float currentPlayerHealth;
     public float maxPlayerHealth;
     public int playerHealthHungryDecrease;
 
+    [Header("Hunger variables")]
     public float currentPlayerHunger;
     public float maxPlayerHunger;
     public float playerHungerDecrease;
 
+    [Header("Stamina variables")]
+    public float currentStamina = 100f;
+    public float maxStamina;
+
+    [Header("Speed variables")]
     public float speed;
     public float sprintMultiplier;
     public float originalSpeed;
 
-    public float distanceToGrass;
-    public float distanceToTwigs;
-
-    public float currentStamina = 100f;
-    public float maxStamina;
-
+    [Header("Change in speed variables")]
     public float sprintIncrease;
     public float sprintDecrease;
 
+    [Header("Speed cooldown variables")]
     public float sprintCooldown;
     public float sprintDefaultCooldown;
 
+    [Header("Distance to objects")]
+    public float distanceToGrass;
+    public float distanceToTwigs;
+
+    [Header("HUD slider variables")]
     public float staminaSliderValue = 100f;
     public float originalStaminaSliderValue;
     public float interactSliderValue = 0f;
     public float originalInteractSliderValue;
 
+    [Header("Iteraction variables")]
     public float interactCooldown = 100f;
     public float originalGrabCooldown;
 
+    [Header("Drag physics variables")]
     public float originalDrag;
     public float affectedDrag;
 
+    [Header("Booleans variables")]
     public bool isSprintPressed = false;
     public bool sprintCooldownActive = false;
 
-    public Vector3 playerVelocity;
-    public Vector3 noMovement;
 
     bool interactCooldownActive = false;
     bool canMove = true;
 
+    [Header("Movement variables")]
+    public Vector3 playerVelocity;
+
+     Vector3 noMovement;
+    
     private Item itemToPickup;
 
     public Item grassItem;
@@ -67,6 +82,10 @@ public class Player : MonoBehaviour
 
     GameObject lastCollectedItem;
 
+    [Header("Transforms")]
+    public Transform camera;
+
+    [Header("Objects")]
     public InteractionBar interactBar;
     public StaminaBar staminaBar;
     public HealthBar healthBar;
@@ -91,7 +110,19 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        //MovePlayerRelativeToCamera();
+        float horizontalMovement = Input.GetAxisRaw("Horizontal");
+        float verticalMovement = Input.GetAxisRaw("Vertical");
+
+        Vector3 camForward = camera.forward;
+        Vector3 camRight = camera.right;
+
+        camForward.y = 0;
+        camRight.y = 0;
+
+        Vector3 forwardRelative = verticalMovement * camForward;
+        Vector3 rightRelative = horizontalMovement * camRight;
+
+        Vector3 moveDirection = forwardRelative + rightRelative;
 
         if(Input.GetKeyDown(KeyCode.F))
         {
@@ -316,12 +347,11 @@ public class Player : MonoBehaviour
 
         }
 
-        float horizontalMovement = Input.GetAxisRaw("Horizontal");
-        float verticalMovement = Input.GetAxisRaw("Vertical");
+        
 
         if(canMove == true)
         {
-            movement = new Vector3(horizontalMovement, 0, verticalMovement);
+            movement = new Vector3(moveDirection.x, 0, moveDirection.z);
         }
 
 

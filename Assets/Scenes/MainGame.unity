@@ -2604,6 +2604,10 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 1666134486}
+    - target: {fileID: 6567846924446706230, guid: d4d1131844125934f911f4880b4af0d8, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 1666134486}
     - target: {fileID: 6929797112263444445, guid: d4d1131844125934f911f4880b4af0d8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
