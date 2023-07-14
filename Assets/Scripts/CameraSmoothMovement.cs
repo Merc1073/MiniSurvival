@@ -24,8 +24,6 @@ public class CameraSmoothMovement : MonoBehaviour
         Vector3 smoothPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
         transform.position = smoothPosition;
 
-        Debug.Log(playerYRotation);
-
         transform.rotation = Quaternion.Euler(new Vector3(0, playerYRotation, 0));
 
     }

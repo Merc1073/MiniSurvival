@@ -84,12 +84,16 @@ public class Player : MonoBehaviour
 
     [Header("Transforms")]
     public Transform camera;
+    public Transform cameraPivot;
 
     [Header("Objects")]
     public InteractionBar interactBar;
     public StaminaBar staminaBar;
     public HealthBar healthBar;
     public HungerBar hungerBar;
+
+    public Vector3 cam2Forward;
+    public Vector3 cam2Right;
 
 
     private void Start()
@@ -110,27 +114,50 @@ public class Player : MonoBehaviour
     void Update()
     {
 
+
         float horizontalMovement = Input.GetAxisRaw("Horizontal");
         float verticalMovement = Input.GetAxisRaw("Vertical");
 
+        float mouseWheelInput = Input.GetAxis("Mouse ScrollWheel");
+
         Vector3 camForward = camera.forward;
         Vector3 camRight = camera.right;
+        Vector3 camUp= camera.up;
+
+        cam2Forward = camera.forward;
+        cam2Right = camera.right;
 
         camForward.y = 0;
         camRight.y = 0;
 
+
         Vector3 forwardRelative = verticalMovement * camForward;
         Vector3 rightRelative = horizontalMovement * camRight;
 
+        Vector3 forwardCameraRelative = mouseWheelInput * camForward;
+        Vector3 rightCameraRelative = mouseWheelInput * camRight;
+
         Vector3 moveDirection = forwardRelative + rightRelative;
+
 
         if (canMove == true)
         {
             movement = new Vector3(moveDirection.x, 0, moveDirection.z).normalized;
         }
 
-
         rb.AddForce(movement * speed * Time.deltaTime);
+
+        
+
+        //if (mouseWheelInput > 0f)
+        //{
+        //    cameraPivot.transform.position += mouseWheelInput * (cameraDirection) * 20;
+        //}
+
+        //if (mouseWheelInput < 0f)
+        //{
+        //    cameraPivot.transform.position += mouseWheelInput * (-cameraDirection) * 20;
+        //}
 
 
         if (Input.GetKeyDown(KeyCode.F))
