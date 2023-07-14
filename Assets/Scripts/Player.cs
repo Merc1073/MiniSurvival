@@ -124,7 +124,16 @@ public class Player : MonoBehaviour
 
         Vector3 moveDirection = forwardRelative + rightRelative;
 
-        if(Input.GetKeyDown(KeyCode.F))
+        if (canMove == true)
+        {
+            movement = new Vector3(moveDirection.x, 0, moveDirection.z).normalized;
+        }
+
+
+        rb.AddForce(movement * speed * Time.deltaTime);
+
+
+        if (Input.GetKeyDown(KeyCode.F))
         {
             UseSelectedItem();
 
@@ -217,6 +226,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+
+            sprintCooldown = sprintDefaultCooldown;
 
             isSprintPressed = true;
 
@@ -349,13 +360,7 @@ public class Player : MonoBehaviour
 
         
 
-        if(canMove == true)
-        {
-            movement = new Vector3(moveDirection.x, 0, moveDirection.z);
-        }
-
-
-        rb.AddForce(movement * speed * Time.deltaTime);
+        
 
 
     }
